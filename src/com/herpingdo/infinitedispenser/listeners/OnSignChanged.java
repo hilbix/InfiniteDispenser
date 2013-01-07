@@ -13,7 +13,7 @@ public class OnSignChanged implements Listener {
 	@EventHandler
 	public void onSignChanged(SignChangeEvent event)
 	{
-		if (!Utils.isDispenserAdjacent(event.getBlock())) return;
+		/* if (!Utils.isDispenserAdjacent(event.getBlock())) return; */
 		Player p = event.getPlayer();
 		if (event.getLine(0).toLowerCase().contains("[infinite]"))
 		{
