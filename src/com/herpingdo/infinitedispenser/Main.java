@@ -2,6 +2,7 @@ package com.herpingdo.infinitedispenser;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.herpingdo.infinitedispenser.listeners.OnDispense;
 import com.herpingdo.infinitedispenser.listeners.OnSignChanged;
 
 public class Main extends JavaPlugin {
@@ -10,6 +11,7 @@ public class Main extends JavaPlugin {
 	{
 		/* Register some listeners... */
 		getServer().getPluginManager().registerEvents(new OnSignChanged(), this);
+		getServer().getPluginManager().registerEvents(new OnDispense(), this);
 	}
 
 }
