@@ -19,7 +19,7 @@ public class OnDispense implements Listener {
 		ItemStack justDispensed = event.getItem();
 		if (b != null)
 		{
-			Inventory dispenserInv = ((Dispenser)block).getInventory();
+			Inventory dispenserInv = ((Dispenser)block.getState()).getInventory();
 			if (!dispenserInv.contains(justDispensed.getType())) dispenserInv.clear();
 			justDispensed.setAmount(64);
 			dispenserInv.addItem(justDispensed);

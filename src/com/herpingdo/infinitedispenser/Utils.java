@@ -18,11 +18,11 @@ public class Utils {
 	 */
 	public static Block getAdjacentSign(Block bb, String search, int line)
 	{
-		for (Block b : getAdjacentSigns(bb))
+		for (Object b : getAdjacentSigns(bb))
 		{
-			String[] lines = ((Sign)bb).getLines();
+			String[] lines = ((Sign) ((Block)b).getState()).getLines();
 			if (lines.length < line + 1) continue;
-			if (lines[line].equalsIgnoreCase(search)) return b;
+			if (lines[line].equalsIgnoreCase(search)) return ((Block)b);
 		}
 		return null;
 	}
@@ -32,7 +32,7 @@ public class Utils {
 	 * @param bl - The block to get adjacent signs of.
 	 * @return Block[] array of signs.
 	 */
-	public static Block[] getAdjacentSigns(Block bl)
+	public static Object[] getAdjacentSigns(Block bl)
 	{
 		ArrayList<Block> tmp2 = new ArrayList<Block>();
 		Block[] tmp = {
@@ -52,6 +52,6 @@ public class Utils {
 			}
 		}
 		if (tmp2.size() <= 0) return null;
-		return (Block[]) tmp2.toArray();
+		return tmp2.toArray();
 	}
 }

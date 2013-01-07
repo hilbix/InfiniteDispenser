@@ -11,8 +11,8 @@ public class OnSignChanged implements Listener {
 	@EventHandler
 	public void onSignChanged(SignChangeEvent event)
 	{
-		if (!(event.getBlock() instanceof Sign)) return;
-		Sign sign = (Sign) event.getBlock();
+		//if (!(event.getBlock() instanceof Sign)) return;
+		Sign sign = (Sign) event.getBlock().getState();
 		String[] signLines = sign.getLines();
 		if (signLines.length <= 0) return;
 		if (signLines[0].equalsIgnoreCase("[Infinite]"))
