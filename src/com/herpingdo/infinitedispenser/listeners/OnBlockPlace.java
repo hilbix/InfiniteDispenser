@@ -2,6 +2,7 @@ package com.herpingdo.infinitedispenser.listeners;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -13,10 +14,11 @@ public class OnBlockPlace implements Listener {
 	@EventHandler
 	public void onBlockPlace(BlockPlaceEvent event)
 	{
-		if (event.getBlock().getType().equals(Material.DISPENSER))
+		Block placed = event.getBlockPlaced();
+		if (placed.getType().equals(Material.DISPENSER))
 		{
 			Player play = event.getPlayer();
-			if (Utils.getAdjacentSign(event.getBlock(), "[Infinite]", 0) != null)
+			if (Utils.getAdjacentSign(placed, "[Infinite]", 0) != null)
 			{
 				if (!play.hasPermission("infinitedispenser.create") && !play.isOp())
 				{

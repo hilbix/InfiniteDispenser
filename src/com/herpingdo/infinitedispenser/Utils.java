@@ -18,7 +18,10 @@ public class Utils {
 	 */
 	public static Block getAdjacentSign(Block bb, String search, int line)
 	{
-		for (Object b : getAdjacentSigns(bb))
+		Object[] oo = getAdjacentSigns(bb);
+		/* Fixes NullPointerException when placing dispensers */
+		if (oo == null) return null;
+		for (Object b : oo)
 		{
 			String[] lines = ((Sign) ((Block)b).getState()).getLines();
 			if (lines.length < line + 1) continue;
@@ -80,5 +83,10 @@ public class Utils {
 		}
 		if (tmp2.size() <= 0) return false;
 		return true;
+	}
+	public static boolean isInfiniteDispenser(Block block)
+	{
+		if (!block.getType().equals(Material.DISPENSER)) return false;
+		return (getAdjacentSign(block, "[Infinite]", 0) != null);
 	}
 }
