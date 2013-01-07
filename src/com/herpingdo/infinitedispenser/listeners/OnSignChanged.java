@@ -14,10 +14,10 @@ public class OnSignChanged implements Listener {
 		if (!(event.getBlock() instanceof Sign)) return;
 		Sign sign = (Sign) event.getBlock();
 		String[] signLines = sign.getLines();
+		if (signLines.length <= 0) return;
 		if (signLines[0].equalsIgnoreCase("[Infinite]"))
 		{
-			/* This might give the user some indication that it worked. */
-			sign.setLine(0, ChatColor.RED+"=[Infinite]=");
+			event.getPlayer().sendMessage(ChatColor.GREEN+"[InfiniteDispenser]"+ChatColor.YELLOW+" You just created an infinite dispenser!");
 		}
 	}
 
