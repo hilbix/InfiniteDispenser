@@ -54,4 +54,31 @@ public class Utils {
 		if (tmp2.size() <= 0) return null;
 		return tmp2.toArray();
 	}
+	
+	/** Returns true if the specified Block is next to a dispenser.
+	 * 
+	 * @param bl - The block.
+	 * @return True or false, see above.
+	 */
+	public static boolean isDispenserAdjacent(Block bl)
+	{
+		ArrayList<Block> tmp2 = new ArrayList<Block>();
+		Block[] tmp = {
+			bl.getRelative(BlockFace.UP),
+			bl.getRelative(BlockFace.DOWN),
+			bl.getRelative(BlockFace.NORTH),
+			bl.getRelative(BlockFace.SOUTH),
+			bl.getRelative(BlockFace.EAST),
+			bl.getRelative(BlockFace.WEST)
+		};
+		for (Block b : tmp)
+		{
+			if (b.getType().equals(Material.DISPENSER))
+			{
+				tmp2.add(b);
+			}
+		}
+		if (tmp2.size() <= 0) return false;
+		return true;
+	}
 }
