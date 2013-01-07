@@ -6,8 +6,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.SignChangeEvent;
 
-import com.herpingdo.infinitedispenser.Utils;
-
 public class OnSignChanged implements Listener {
 	/* Called when we update a sign, or place it. */
 	@EventHandler
