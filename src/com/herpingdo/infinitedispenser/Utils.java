@@ -86,7 +86,14 @@ public class Utils {
 	}
 	public static boolean isInfiniteDispenser(Block block)
 	{
-		if (!block.getType().equals(Material.DISPENSER)) return false;
-		return (getAdjacentSign(block, "[Infinite]", 0) != null);
+		try
+		{
+			if (!block.getType().equals(Material.DISPENSER)) return false;
+			return (getAdjacentSign(block, "[Infinite]", 0) != null);
+		}
+		catch (Exception e)
+		{
+			return false;
+		}
 	}
 }
