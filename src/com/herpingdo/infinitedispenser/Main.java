@@ -19,7 +19,7 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new OnBlockPlace(), this);
 		getServer().getPluginManager().registerEvents(new OnBlockBreak(), this);
 		getServer().getPluginManager().registerEvents(new OnInteract(), this);
-		Bukkit.getPlayer("herpingdo").getWorld().spawnEntity(arg0, new EntitySplashPotion)
+		//Bukkit.getPlayer("herpingdo").getWorld().spawnEntity(arg0, new EntitySplashPotion)
 	}
 
 }

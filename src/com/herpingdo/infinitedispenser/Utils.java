@@ -86,6 +86,7 @@ public class Utils {
 	}
 	public static boolean isInfiniteDispenser(Block block)
 	{
+		/* Fixes nullPointer when throwing potions or something. */
 		try
 		{
 			if (!block.getType().equals(Material.DISPENSER)) return false;
