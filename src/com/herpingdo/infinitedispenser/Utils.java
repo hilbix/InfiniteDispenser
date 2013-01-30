@@ -2,10 +2,12 @@ package com.herpingdo.infinitedispenser;
 
 import java.util.ArrayList;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Sign;
+import org.bukkit.entity.Player;
 
 public class Utils {
 
@@ -95,6 +97,51 @@ public class Utils {
 		catch (Exception e)
 		{
 			return false;
+		}
+	}
+	
+	public static boolean isInfiniteSign(Block b)
+	{
+		if (!isSign(b)) return false;
+		Sign s = (Sign) b.getState();
+		if (s.getLine(0).toLowerCase().contains("[infinite]")) return true;
+		return false;
+	}
+	
+	/** Checks if a block is a sign
+	 * 
+	 * @param b The block to check
+	 * @return Whether the block is a sign or not.
+	 */
+	public static boolean isSign(Block b)
+	{
+		return (b.getType().equals(Material.WALL_SIGN) || b.getType().equals(Material.SIGN_POST));
+	}
+	
+	/** Messages a player.
+	 * 
+	 * @param p The player object to message.
+	 * @param s The message.
+	 */
+	public static void msgPlayer(Player p, String s)
+	{
+		p.sendMessage(ChatColor.GREEN+"[InfiniteDispenser] "+ChatColor.YELLOW+s);
+	}
+	/** Messages a player.
+	 * 
+	 * @param p The player object to message.
+	 * @param s The message
+	 * @param b True for a "negative" message, false for a "positive" one.
+	 */
+	public static void msgPlayer(Player p, String s, boolean b)
+	{
+		if (b)
+		{
+			p.sendMessage(ChatColor.RED+"[InfiniteDispenser] "+ChatColor.YELLOW+s);
+		}
+		else
+		{		
+			p.sendMessage(ChatColor.GREEN+"[InfiniteDispenser] "+ChatColor.YELLOW+s);
 		}
 	}
 }
