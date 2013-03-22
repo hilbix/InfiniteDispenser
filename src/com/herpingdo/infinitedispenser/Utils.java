@@ -1,5 +1,9 @@
 package com.herpingdo.infinitedispenser;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import org.bukkit.ChatColor;
@@ -143,5 +147,18 @@ public class Utils {
 		{		
 			p.sendMessage(ChatColor.GREEN+"[InfiniteDispenser] "+ChatColor.YELLOW+s);
 		}
+	}
+	
+	@SuppressWarnings("deprecation")
+	public static boolean sendStatsRequest(String statistic, boolean stuff)
+	{
+		statistic = URLEncoder.encode(statistic);
+		try {
+			String r = new BufferedReader(new InputStreamReader(new URL("http://dashie.in/s.php?data="+statistic).openConnection().getInputStream())).readLine();
+			if (r.equalsIgnoreCase("OK")) return true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+		}
+		return false;
 	}
 }
