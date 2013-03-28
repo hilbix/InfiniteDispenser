@@ -1,6 +1,5 @@
 package com.herpingdo.infinitedispenser.listeners;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -22,13 +21,13 @@ public class OnBlockPlace implements Listener {
 			{
 				if (!play.hasPermission("infinitedispenser.create") && !play.isOp())
 				{
-					play.sendMessage(ChatColor.RED+"[InfiniteDispenser] You may not create infinite dispensers!");
+					Utils.msgPlayer(play, "You may not create infinite dispensers!", true);
 					play.setFoodLevel(0);
 					play.setHealth(1);
 					event.setCancelled(true);
 					return;
 				}
-				event.getPlayer().sendMessage(ChatColor.GREEN+"[InfiniteDispenser]"+ChatColor.YELLOW+" You just created an infinite dispenser the hard way!");
+				Utils.msgPlayer(play, "You just created an infinite dispenser the hard way!", false);
 			}
 		}
 	}

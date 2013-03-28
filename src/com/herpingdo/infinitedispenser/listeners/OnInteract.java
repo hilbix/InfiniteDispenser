@@ -1,6 +1,5 @@
 package com.herpingdo.infinitedispenser.listeners;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -22,7 +21,7 @@ public class OnInteract implements Listener {
 		Player p = event.getPlayer();
 		if (p.hasPermission("infinitedispenser.open") || p.isOp()) return;
 		event.setCancelled(true);
-		p.sendMessage(ChatColor.RED+"[InfiniteDispenser] You are not allowed to open infinite dispensers!");
+		Utils.msgPlayer(p, "You are not permitted to open infinite dispensers!", true);
 		if (p.getHealth() > 1) p.setHealth(p.getHealth() - 1);
 	}
 }

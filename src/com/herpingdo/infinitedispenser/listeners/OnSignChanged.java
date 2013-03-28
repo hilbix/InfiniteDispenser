@@ -1,10 +1,11 @@
 package com.herpingdo.infinitedispenser.listeners;
 
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.SignChangeEvent;
+
+import com.herpingdo.infinitedispenser.Utils;
 
 public class OnSignChanged implements Listener {
 	/* Called when we update a sign, or place it. */
@@ -17,7 +18,7 @@ public class OnSignChanged implements Listener {
 		{
 			if (!p.hasPermission("infinitedispenser.create") && !p.isOp())
 			{
-				p.sendMessage(ChatColor.RED+"[InfiniteDispenser] You may not make infinite dispensers!");
+				Utils.msgPlayer(p, "You may not create infinite dispensers!", true);
 				p.setFoodLevel(0);
 				/* 0.5 heart */
 				p.setHealth(1);
@@ -25,7 +26,7 @@ public class OnSignChanged implements Listener {
 				return;
 			}
 			event.setLine(0, "[Infinite]");
-			event.getPlayer().sendMessage(ChatColor.GREEN+"[InfiniteDispenser]"+ChatColor.YELLOW+" You just created an infinite dispenser!");
+			Utils.msgPlayer(p, "You just created an infinite dispenser! (Or at least the sign part.)", false);
 		}
 	}
 

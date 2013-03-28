@@ -1,6 +1,5 @@
 package com.herpingdo.infinitedispenser.listeners;
 
-import org.bukkit.ChatColor;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -19,7 +18,7 @@ public class OnBlockBreak implements Listener {
 		if (Utils.isInfiniteDispenser(b) && !(p.hasPermission("infinitedispenser.break") || p.isOp())) //They tried to break an infinite dispenser
 		{
 			event.setCancelled(true);
-			p.sendMessage(ChatColor.RED+"[InfiniteDispenser] You may not break infinite dispensers!");
+			Utils.msgPlayer(p, "You may not break infinite dispensers!", true);
 			if (p.getHealth() > 1) p.setHealth(p.getHealth() - 1);
 		}
 		

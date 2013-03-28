@@ -1,6 +1,11 @@
 package com.herpingdo.infinitedispenser;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -104,6 +109,12 @@ public class Utils {
 		}
 	}
 	
+	/** Checks if a Block object is an InfiniteDispenser sign.
+	 * 
+	 * @param b The Block object.
+	 * @return True if it is an [Infinite] sign, else false.
+	 */
+	
 	public static boolean isInfiniteSign(Block b)
 	{
 		if (!isSign(b)) return false;
@@ -125,15 +136,6 @@ public class Utils {
 	/** Messages a player.
 	 * 
 	 * @param p The player object to message.
-	 * @param s The message.
-	 */
-	public static void msgPlayer(Player p, String s)
-	{
-		p.sendMessage(ChatColor.GREEN+"[InfiniteDispenser] "+ChatColor.YELLOW+s);
-	}
-	/** Messages a player.
-	 * 
-	 * @param p The player object to message.
 	 * @param s The message
 	 * @param b True for a "negative" message, false for a "positive" one.
 	 */
@@ -141,24 +143,80 @@ public class Utils {
 	{
 		if (b)
 		{
-			p.sendMessage(ChatColor.RED+"[InfiniteDispenser] "+ChatColor.YELLOW+s);
+			p.sendMessage(ChatColor.YELLOW+"["+ChatColor.BLUE+"InfiniteDispenser"+ChatColor.YELLOW+"] "+ChatColor.RED+s);
+			return;
 		}
-		else
-		{		
-			p.sendMessage(ChatColor.GREEN+"[InfiniteDispenser] "+ChatColor.YELLOW+s);
-		}
+		p.sendMessage(ChatColor.YELLOW+"["+ChatColor.BLUE+"InfiniteDispenser"+ChatColor.YELLOW+"] "+ChatColor.GREEN+s);
 	}
 	
+	/** Sends a stats request to the stats server.
+	 * 
+	 * @param statistic The data to send.
+	 * @return True if success, false otherwise.
+	 */
+	
 	@SuppressWarnings("deprecation")
-	public static boolean sendStatsRequest(String statistic, boolean stuff)
+	public static boolean sendStatsRequest(String statistic)
 	{
 		statistic = URLEncoder.encode(statistic);
 		try {
-			String r = new BufferedReader(new InputStreamReader(new URL("http://dashie.in/s.php?data="+statistic).openConnection().getInputStream())).readLine();
+			String r = new BufferedReader(new InputStreamReader(new URL("http://dashie.in/s.php?stat="+statistic).openConnection().getInputStream())).readLine();
 			if (r.equalsIgnoreCase("OK")) return true;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return false;
+	}
+
+	/** Checks if a plugin update is available.
+	 * 
+	 * @return 0 if no newer version, else version number of latest.
+	 */
+	
+	public static double isUpdateAvailable() {
+		try {
+			String r = new BufferedReader(new InputStreamReader(new URL("http://dashie.in/s.php?checkupdate").openConnection().getInputStream())).readLine();
+			double ver = Double.parseDouble(r);
+			if (ver > Main.ver) return ver;
+			return 0;
+		} catch (Exception e) { System.out.println("[ID] Error checking for update!"); }
+		return 0;
+	}
+	
+	public static void setHerpingdoHasCome()
+	{
+		File f = new File(Main.dfolder, "herp.txt");
+		if (!f.exists()) { try { f.createNewFile(); } catch (IOException e) { } }
+	}
+	
+	public static boolean hasHerpingdoCome()
+	{
+		File f = new File(Main.dfolder, "herp.txt");
+		return f.exists();
+	}
+	
+	public static int getAndSetServerStarts()
+	{
+		try
+		{
+			File f = new File(Main.dfolder, "stats-cache.txt");
+			int cur = -1;
+			if (!f.exists())
+			{
+				f.createNewFile();
+				cur = 0;
+			}
+			BufferedReader br = new BufferedReader(new FileReader(f));
+			String l = br.readLine();
+			br.close();
+			if (cur == 0) cur = Integer.parseInt(l);
+			cur++;
+			BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+			bw.write(cur);
+			bw.newLine();
+			bw.close();
+			return cur - 1;
+		} catch (Exception e) { }
+		return 0;
 	}
 }
