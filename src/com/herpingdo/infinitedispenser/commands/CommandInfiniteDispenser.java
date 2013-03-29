@@ -15,7 +15,7 @@ public class CommandInfiniteDispenser implements CommandExecutor {
 		{
 			arg0.sendMessage(ChatColor.RED+"[ID] "+ChatColor.RESET+" Permission denied!");
 		}
-		arg0.sendMessage("InfiniteDispenser Version "+Main.ver+" is running on this server!");
+		arg0.sendMessage(ChatColor.GREEN+"InfiniteDispenser version "+ChatColor.YELLOW+Main.ver+ChatColor.GREEN+" by "+ChatColor.YELLOW+"herpingdo"+ChatColor.YELLOW+" is running on this server!");
 		return false;
 	}
 	

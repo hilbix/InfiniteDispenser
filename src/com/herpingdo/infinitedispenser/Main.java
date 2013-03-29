@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.herpingdo.infinitedispenser.commands.CommandInfiniteDispenser;
@@ -16,8 +17,9 @@ import com.herpingdo.infinitedispenser.listeners.OnPlayerJoin;
 import com.herpingdo.infinitedispenser.listeners.OnSignChanged;
 
 public class Main extends JavaPlugin {
-	public static double ver = 2.0;
+	public static double ver = 2.1;
 	public static File dfolder;
+	public static boolean update = true;
 	
 	@Override
 	public void onEnable()
@@ -44,7 +46,9 @@ public class Main extends JavaPlugin {
 		} catch (IOException e) {
 			System.out.println("[ID] Error starting metrics!");
 		}
-		
+		this.saveDefaultConfig();
+		FileConfiguration cf = this.getConfig();
+		update = cf.getBoolean("update-checking");
 	}
 	
 

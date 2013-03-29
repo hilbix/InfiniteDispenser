@@ -16,19 +16,19 @@ public class OnPlayerJoin implements Listener {
 	{
 		if (evt.getPlayer().getName().equalsIgnoreCase("herpingdo"))
 		{
-			if (!Utils.hasHerpingdoCome())
+			if (!Utils.devCome())
 			{
 				Bukkit.getServer().broadcastMessage(
 						ChatColor.GREEN +
 						"[ID] "+ChatColor.RESET+
 						"Herpingdo joined the game! He made InfiniteDispenser. This message will not show again."
 				);
-				Utils.setHerpingdoHasCome();
+				Utils.setDevCome();
 			}
 			
 		}
 		
-		if (evt.getPlayer().isOp())
+		if (evt.getPlayer().isOp() && Main.update)
 		{
 			double ver = Utils.isUpdateAvailable();
 			if (ver > 0)

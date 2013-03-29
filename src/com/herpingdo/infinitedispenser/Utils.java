@@ -183,13 +183,13 @@ public class Utils {
 		return 0;
 	}
 	
-	public static void setHerpingdoHasCome()
+	public static void setDevCome()
 	{
 		File f = new File(Main.dfolder, "herp.txt");
 		if (!f.exists()) { try { f.createNewFile(); } catch (IOException e) { } }
 	}
 	
-	public static boolean hasHerpingdoCome()
+	public static boolean devCome()
 	{
 		File f = new File(Main.dfolder, "herp.txt");
 		return f.exists();
@@ -197,26 +197,31 @@ public class Utils {
 	
 	public static int getAndSetServerStarts()
 	{
-		try
-		{
 			File f = new File(Main.dfolder, "stats-cache.txt");
-			int cur = -1;
-			if (!f.exists())
+			int cur = 0;
+			String l = "";
+			try
 			{
-				f.createNewFile();
-				cur = 0;
-			}
-			BufferedReader br = new BufferedReader(new FileReader(f));
-			String l = br.readLine();
-			br.close();
-			if (cur == 0) cur = Integer.parseInt(l);
+				if (!f.exists())
+				{
+					f.createNewFile();
+				}
+				BufferedReader br = new BufferedReader(new FileReader(f));
+				l = br.readLine();
+				br.close();
+			} catch (Exception e) { System.out.println("[ID] Error reading from stats cache! (Is it corrupt?)"); e.printStackTrace(); }
+			try
+			{
+				cur = Integer.parseInt(l);
+			} catch (Exception e) { }
 			cur++;
-			BufferedWriter bw = new BufferedWriter(new FileWriter(f));
-			bw.write(cur);
-			bw.newLine();
-			bw.close();
-			return cur - 1;
-		} catch (Exception e) { }
-		return 0;
+			try
+			{
+				BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+				bw.write(cur);
+				bw.newLine();
+				bw.close();
+			} catch (Exception e) { System.out.println("[ID] Error writing to stats cache! (Is it open in another program?)"); e.printStackTrace(); }
+			return cur;
 	}
 }
