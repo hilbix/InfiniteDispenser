@@ -21,7 +21,7 @@ public class OnPlayerJoin implements Listener {
 				Bukkit.getServer().broadcastMessage(
 						ChatColor.GREEN +
 						"[ID] "+ChatColor.RESET+
-						"Herpingdo joined the game! He made InfiniteDispenser. This message will not show again."
+						"Herpingdo joined the game! He made InfiniteDispenser. This message will never show again."
 				);
 				Utils.setDevCome();
 			}

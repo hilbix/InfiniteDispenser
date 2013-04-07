@@ -1,10 +1,7 @@
 package com.herpingdo.infinitedispenser;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -193,35 +190,5 @@ public class Utils {
 	{
 		File f = new File(Main.dfolder, "herp.txt");
 		return f.exists();
-	}
-	
-	public static int getAndSetServerStarts()
-	{
-			File f = new File(Main.dfolder, "stats-cache.txt");
-			int cur = 0;
-			String l = "";
-			try
-			{
-				if (!f.exists())
-				{
-					f.createNewFile();
-				}
-				BufferedReader br = new BufferedReader(new FileReader(f));
-				l = br.readLine();
-				br.close();
-			} catch (Exception e) { System.out.println("[ID] Error reading from stats cache! (Is it corrupt?)"); e.printStackTrace(); }
-			try
-			{
-				cur = Integer.parseInt(l);
-			} catch (Exception e) { }
-			cur++;
-			try
-			{
-				BufferedWriter bw = new BufferedWriter(new FileWriter(f));
-				bw.write(cur);
-				bw.newLine();
-				bw.close();
-			} catch (Exception e) { System.out.println("[ID] Error writing to stats cache! (Is it open in another program?)"); e.printStackTrace(); }
-			return cur;
 	}
 }

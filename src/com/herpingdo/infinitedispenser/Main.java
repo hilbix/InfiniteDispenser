@@ -15,6 +15,8 @@ import com.herpingdo.infinitedispenser.listeners.OnDispense;
 import com.herpingdo.infinitedispenser.listeners.OnInteract;
 import com.herpingdo.infinitedispenser.listeners.OnPlayerJoin;
 import com.herpingdo.infinitedispenser.listeners.OnSignChanged;
+import com.herpingdo.infinitedispenser.statistics.StatsRequest;
+import com.herpingdo.infinitedispenser.statistics.UIDGenerator;
 
 public class Main extends JavaPlugin {
 	public static double ver = 2.1;
@@ -34,12 +36,18 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new OnInteract(), this);
 		getServer().getPluginManager().registerEvents(new OnPlayerJoin(), this);
 		getCommand("infinitedispenser").setExecutor(new CommandInfiniteDispenser());
+		
 		Server serv = Bukkit.getServer();
-		int totalStarts = Utils.getAndSetServerStarts();
-		String startupStat = "[Server Start] Plugin-Version="+ver+", Server-Version="+serv.getVersion()+
-				", Server-Port="+serv.getPort()+", Server-Max="+serv.getMaxPlayers()+
-				", Server-Total-Starts-With-Plugin="+totalStarts+", Current-Time="+System.currentTimeMillis();
-		Utils.sendStatsRequest(startupStat);
+		StatsRequest s = new StatsRequest("start");
+		s.put("Plugin Version", ver+"");
+		s.put("Bukkit Version", serv.getBukkitVersion());
+		s.put("Full Version", serv.getVersion());
+		s.put("Server Port", serv.getPort()+"");
+		s.put("Online Mode", serv.getOnlineMode()+"");
+		try { s.put("Unique ID", UIDGenerator.getUID()); } catch (Exception e1) { }
+		s.put("Time", System.currentTimeMillis()+"");
+
+		s.send("http://dashie.in/s.php?stat=%stat%");
 		try {
 		    Metrics metrics = new Metrics(this);
 		    metrics.start();
