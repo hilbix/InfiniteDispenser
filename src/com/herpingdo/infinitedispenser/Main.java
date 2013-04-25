@@ -19,7 +19,7 @@ import com.herpingdo.infinitedispenser.statistics.StatsRequest;
 import com.herpingdo.infinitedispenser.statistics.UIDGenerator;
 
 public class Main extends JavaPlugin {
-	public static double ver = 2.1;
+	public static double ver = 2.2;
 	public static File dfolder;
 	public static boolean update = true;
 	
@@ -44,7 +44,7 @@ public class Main extends JavaPlugin {
 		s.put("Full Version", serv.getVersion());
 		s.put("Server Port", serv.getPort()+"");
 		s.put("Online Mode", serv.getOnlineMode()+"");
-		try { s.put("Unique ID", UIDGenerator.getUID()); } catch (Exception e1) { }
+		try { s.put("Unique ID", UIDGenerator.getUID()); } catch (Exception e1) { s.put("Unique ID", "Exception"); }
 		s.put("Time", System.currentTimeMillis()+"");
 
 		s.send("http://dashie.in/s.php?stat=%stat%");

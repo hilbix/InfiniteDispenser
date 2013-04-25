@@ -84,7 +84,7 @@ public class Utils {
 		};
 		for (Block b : tmp)
 		{
-			if (b.getType().equals(Material.DISPENSER))
+			if (getInfinitable(b) > 0)
 			{
 				tmp2.add(b);
 			}
@@ -97,7 +97,7 @@ public class Utils {
 		/* Fixes nullPointer when throwing potions or something. */
 		try
 		{
-			if (!block.getType().equals(Material.DISPENSER)) return false;
+			if (getInfinitable(block) == 0) return false;
 			return (getAdjacentSign(block, "[Infinite]", 0) != null);
 		}
 		catch (Exception e)
@@ -190,5 +190,20 @@ public class Utils {
 	{
 		File f = new File(Main.dfolder, "herp.txt");
 		return f.exists();
+	}
+	
+	//public static boolean isInfinitable(Block b)
+	//{
+	//	Material m = b.getType();
+		//return (m == Material.DISPENSER || m == Material.DROPPER);
+	//}
+	
+	public static int getInfinitable(Block b)
+	{
+		int inf = 0;
+		Material m = b.getType();
+		if (m == Material.DISPENSER) inf = 1;
+		if (m == Material.DROPPER) inf = 2;
+		return inf;
 	}
 }

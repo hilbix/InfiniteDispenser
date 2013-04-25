@@ -15,17 +15,18 @@ public class OnBlockBreak implements Listener {
 		Block b = event.getBlock();
 		Player p = event.getPlayer();
 		//if (!Utils.isInfiniteDispenser(event.getBlock())) return;
+		int i = Utils.getInfinitable(b);
 		if (Utils.isInfiniteDispenser(b) && !(p.hasPermission("infinitedispenser.break") || p.isOp())) //They tried to break an infinite dispenser
 		{
 			event.setCancelled(true);
-			Utils.msgPlayer(p, "You may not break infinite dispensers!", true);
+			Utils.msgPlayer(p, "You may not break infinite "+(i == 1 ? "dispensers" : "droppers")+"!", true);
 			if (p.getHealth() > 1) p.setHealth(p.getHealth() - 1);
 		}
 		
 		else if (Utils.isInfiniteSign(b) && !(p.hasPermission("infinitedispenser.break") || p.isOp()))
 		{
 			event.setCancelled(true);
-			Utils.msgPlayer(p, "You may not break infinite dispenser signs!", true);
+			Utils.msgPlayer(p, "You may not break infinite dispenser/dropper signs!", true);
 			if (p.getHealth() > 1) p.setHealth(p.getHealth() - 1);
 		}
 		

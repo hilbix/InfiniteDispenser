@@ -18,7 +18,7 @@ public class OnSignChanged implements Listener {
 		{
 			if (!p.hasPermission("infinitedispenser.create") && !p.isOp())
 			{
-				Utils.msgPlayer(p, "You may not create infinite dispensers!", true);
+				Utils.msgPlayer(p, "You may not create infinite dispenser/dropper signs!", true);
 				p.setFoodLevel(0);
 				/* 0.5 heart */
 				p.setHealth(1);
@@ -26,7 +26,7 @@ public class OnSignChanged implements Listener {
 				return;
 			}
 			event.setLine(0, "[Infinite]");
-			Utils.msgPlayer(p, "You just created an infinite dispenser! (Or at least the sign part.)", false);
+			Utils.msgPlayer(p, "You just created an infinite dispenser/dropper sign!", false);
 		}
 	}
 

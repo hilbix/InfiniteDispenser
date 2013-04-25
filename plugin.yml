@@ -1,7 +1,7 @@
 main: com.herpingdo.infinitedispenser.Main
 name: InfiniteDispenser
 author: herpingdo
-version: 2.1
+version: 2.2
 commands:
   infinitedispenser:
     description: Displays version information.

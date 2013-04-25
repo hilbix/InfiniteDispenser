@@ -1,6 +1,5 @@
 package com.herpingdo.infinitedispenser.listeners;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -16,15 +15,16 @@ public class OnPlayerJoin implements Listener {
 	{
 		if (evt.getPlayer().getName().equalsIgnoreCase("herpingdo"))
 		{
-			if (!Utils.devCome())
-			{
-				Bukkit.getServer().broadcastMessage(
-						ChatColor.GREEN +
-						"[ID] "+ChatColor.RESET+
-						"Herpingdo joined the game! He made InfiniteDispenser. This message will never show again."
-				);
-				Utils.setDevCome();
-			}
+			//if (!Utils.devCome())
+			//{
+				//Bukkit.getServer().broadcastMessage(
+				//		ChatColor.GREEN +
+				//		"[ID] "+ChatColor.RESET+
+				//		"Herpingdo joined the game! He made InfiniteDispenser. This message will never show again."
+				//);
+				//Utils.setDevCome();
+			//}
+			evt.getPlayer().sendMessage("[InfiniteDispenser] This server is running InfiniteDispenser version "+Main.ver);
 			
 		}
 		

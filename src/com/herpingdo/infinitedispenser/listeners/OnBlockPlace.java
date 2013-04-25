@@ -1,6 +1,5 @@
 package com.herpingdo.infinitedispenser.listeners;
 
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -14,7 +13,8 @@ public class OnBlockPlace implements Listener {
 	public void onBlockPlace(BlockPlaceEvent event)
 	{
 		Block placed = event.getBlockPlaced();
-		if (placed.getType().equals(Material.DISPENSER))
+		int inf = Utils.getInfinitable(placed);
+		if (inf > 0)
 		{
 			Player play = event.getPlayer();
 			if (Utils.getAdjacentSign(placed, "[Infinite]", 0) != null)
@@ -27,7 +27,8 @@ public class OnBlockPlace implements Listener {
 					event.setCancelled(true);
 					return;
 				}
-				Utils.msgPlayer(play, "You just created an infinite dispenser the hard way!", false);
+				String type = (inf == 0 ? "dispenser" : "dropper");
+				Utils.msgPlayer(play, "You just created an infinite "+type+" the hard way!", false);
 			}
 		}
 	}

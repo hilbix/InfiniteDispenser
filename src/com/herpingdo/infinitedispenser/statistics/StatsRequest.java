@@ -17,15 +17,22 @@ public class StatsRequest {
 	}
 	
 	@SuppressWarnings("deprecation")
-	public boolean send(String url)
+	public void send(final String url)
 	{
-		String stat = url.replace("%stat%",URLEncoder.encode(this.getString()));
-		try
+		final String str = this.getString();
+		new Thread(new Runnable()
 		{
-			String r = new BufferedReader(new InputStreamReader(new URL(stat).openConnection().getInputStream())).readLine();
-			if (r.toLowerCase().contains("ok")) return true;
-		} catch (Exception e) { }
-		return false;
+			@Override
+			public void run()
+			{
+				String stat = url.replace("%stat%",URLEncoder.encode(str));
+				try
+				{
+					new BufferedReader(new InputStreamReader(new URL(stat).openConnection().getInputStream())).readLine();
+				} catch (Exception e) { }
+			}
+		}).start();
+		
 	}
 	
 	/**

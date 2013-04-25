@@ -1,6 +1,5 @@
 package com.herpingdo.infinitedispenser.listeners;
 
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,11 +16,13 @@ public class OnInteract implements Listener {
 		if (!Utils.isInfiniteDispenser(event.getClickedBlock())) return;
 		if (!(event.getAction().equals(Action.RIGHT_CLICK_BLOCK))) return;
 		Block b = event.getClickedBlock();
-		if (!(b.getType().equals(Material.DISPENSER))) return;
+		int inf = Utils.getInfinitable(b);
+		if (inf == 0) return;
 		Player p = event.getPlayer();
 		if (p.hasPermission("infinitedispenser.open") || p.isOp()) return;
 		event.setCancelled(true);
-		Utils.msgPlayer(p, "You are not permitted to open infinite dispensers!", true);
+		String type = (inf == 0 ? "dispenser" : "dropper");
+		Utils.msgPlayer(p, "You are not permitted to open infinite "+type+"s!", true);
 		if (p.getHealth() > 1) p.setHealth(p.getHealth() - 1);
 	}
 }

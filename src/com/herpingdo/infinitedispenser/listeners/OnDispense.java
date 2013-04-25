@@ -1,7 +1,9 @@
 package com.herpingdo.infinitedispenser.listeners;
 
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockState;
 import org.bukkit.block.Dispenser;
+import org.bukkit.block.Dropper;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockDispenseEvent;
@@ -19,10 +21,23 @@ public class OnDispense implements Listener {
 		ItemStack justDispensed = event.getItem();
 		if (b != null)
 		{
-			Inventory dispenserInv = ((Dispenser)block.getState()).getInventory();
-			if (!dispenserInv.contains(justDispensed.getType())) dispenserInv.clear();
-			justDispensed.setAmount(64);
-			dispenserInv.addItem(justDispensed);
+			BlockState theState = block.getState();
+			if (theState instanceof Dispenser)
+			{
+				Inventory dispenserInv = ((Dispenser)block.getState()).getInventory();
+				if (!dispenserInv.contains(justDispensed.getType())) dispenserInv.clear();
+				justDispensed.setAmount(64);
+				dispenserInv.addItem(justDispensed);
+			}
+			else if (theState instanceof Dropper)
+			{
+				Inventory dispenserInv = ((Dropper)block.getState()).getInventory();
+				if (!dispenserInv.contains(justDispensed.getType())) dispenserInv.clear();
+				justDispensed.setAmount(64);
+				dispenserInv.addItem(justDispensed);
+			}
+			
 		}
+		//org.bukkit.event.block.
 	}
 }
