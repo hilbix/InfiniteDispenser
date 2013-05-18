@@ -16,18 +16,20 @@ import com.herpingdo.infinitedispenser.listeners.OnInteract;
 import com.herpingdo.infinitedispenser.listeners.OnPlayerJoin;
 import com.herpingdo.infinitedispenser.listeners.OnSignChanged;
 import com.herpingdo.infinitedispenser.statistics.StatsRequest;
-import com.herpingdo.infinitedispenser.statistics.UIDGenerator;
+import com.herpingdo.infinitedispenser.statistics.UUIDGenerator;
 
 public class Main extends JavaPlugin {
 	public static double ver = 2.2;
 	public static File dfolder;
 	public static boolean update = true;
+	private UUIDGenerator gen = null;
 	
 	@Override
 	public void onEnable()
 	{
 		dfolder = getDataFolder();
 		dfolder.mkdirs();
+		this.gen = new UUIDGenerator();
 		/* Register some listeners... */
 		getServer().getPluginManager().registerEvents(new OnSignChanged(), this);
 		getServer().getPluginManager().registerEvents(new OnDispense(), this);
@@ -44,7 +46,7 @@ public class Main extends JavaPlugin {
 		s.put("Full Version", serv.getVersion());
 		s.put("Server Port", serv.getPort()+"");
 		s.put("Online Mode", serv.getOnlineMode()+"");
-		try { s.put("Unique ID", UIDGenerator.getUID()); } catch (Exception e1) { s.put("Unique ID", "Exception"); }
+		try { s.put("Unique ID", gen.getUID()); } catch (Exception e1) { }
 		s.put("Time", System.currentTimeMillis()+"");
 
 		s.send("http://dashie.in/s.php?stat=%stat%");
