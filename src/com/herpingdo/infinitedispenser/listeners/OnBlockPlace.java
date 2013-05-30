@@ -27,7 +27,7 @@ public class OnBlockPlace implements Listener {
 					event.setCancelled(true);
 					return;
 				}
-				String type = (inf == 0 ? "dispenser" : "dropper");
+				String type = (inf == 1 ? "dispenser" : "dropper");
 				Utils.msgPlayer(play, "You just created an infinite "+type+" the hard way!", false);
 			}
 		}
